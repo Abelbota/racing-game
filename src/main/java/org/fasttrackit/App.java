@@ -22,11 +22,13 @@ public class App
                 LocalDateTime.now().plusYears(10);
 
         Car car = new Car(engine);
-        car.name = "Dacia";
-        car.color = "white";
+        car.setName("Dacia");
+        car.setColor("white");
         car.doorCount = 4;
-        car.mileage = 7.5;
+        car.setMileage(7.5);
         car.running = true;
+
+        System.out.println(car.getName());
 
         double carTraveledDistance = car.accelerate(100, 2);
 
@@ -46,7 +48,8 @@ public class App
 
 
         Car car2 = new Car(engine);
-        car2.name = "sfa";
+        car.setName("sfa");
+
 
         // some new content
     }
