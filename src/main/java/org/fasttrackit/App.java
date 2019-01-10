@@ -1,5 +1,7 @@
 package org.fasttrackit;
 
+import org.fasttrackit.cheater.UFO;
+
 import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 
@@ -15,18 +17,17 @@ import java.time.LocalDateTime;
 // this is a comment
 public class App {
     public static void main(String[] args) {
-//        Engine engine = new Engine();
-//        engine.manufacturer = "Renault";
-//        engine.capacity = 1500;
-//        engine.expiryTime =
-//                LocalDateTime.now().plusYears(10);
-//
-//        Car car = new Car(engine);
-//        car.setName("Dacia");
-//        car.setColor("white");
-//        car.doorCount = 4;
-//        car.setMileage(7.5);
-//        car.running = true;
+
+                LocalDateTime.now().plusYears(10);
+                Engine engine = new Engine();
+                Car car = new Car(engine);
+        car.setName("Dacia");
+        car.setColor("white");
+        car.doorCount = 4;
+        car.setMileage(7.5);
+        car.running = true;
+
+        System.out.println(car.toString());
 //
 //
 //        System.out.println(car.getName());
@@ -72,6 +73,8 @@ public class App {
 
         vehicle1.accelerate(34.12);
         vehicle1.accelerate(130, 0.8);
+
+        new UFO().accelerate(130,0.8);
 
 
 
