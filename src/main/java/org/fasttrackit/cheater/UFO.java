@@ -16,9 +16,20 @@ public class UFO extends Vehicle {
         return traveledDistance;
     }
 
-    public void  concealCheating(){
+
+
+    public void  concealCheating() {
         System.out.println("i'm not cheating");
+
     }
+//     example of co-varriant return type
+//    example of extending acces priveleges in overriden method
+    @Override
+    public Vehicle clone() {
+        return new UFO();
+
+    }
+
 
 
 }

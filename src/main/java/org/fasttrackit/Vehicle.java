@@ -25,7 +25,14 @@ public class Vehicle {
 //    example of method overloading
     public double accelerate(double speed ) {
         return accelerate(speed, 1);
+
     }
+     protected Vehicle clone(){
+        Vehicle vehicle = new Vehicle();
+//        copy proprietes from current object or simply call this.clone();
+         return vehicle;
+     }
+
 
     public String getName() {
         return name;
