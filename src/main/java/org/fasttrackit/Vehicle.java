@@ -22,6 +22,10 @@ public class Vehicle {
         return traveledDistance;
 
     }
+//    example of method overloading
+    public double accelerate(double speed ) {
+        return accelerate(speed, 1);
+    }
 
     public String getName() {
         return name;
