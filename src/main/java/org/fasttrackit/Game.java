@@ -1,7 +1,10 @@
 package org.fasttrackit;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
 
@@ -10,24 +13,54 @@ public class Game {
     private List<Vehicle> competitors = new ArrayList<>();
 
 
-
-    public void start() {
-        addCompetitors(3);
+    public void start() throws Exception {
+        addCompetitors(getCompetitorCountFromUser());
         displayCompetitors();
         addTracks();
         displayAvailableTracks();
+
+        Track track =
     }
-    private void addCompetitors(int competitorCount){
-        for (int i = 0; i < competitorCount; i++){
+
+    private void addCompetitors(int competitorCount) {
+        for (int i = 0; i < competitorCount; i++) {
             Vehicle vehicle = new Vehicle();
-//            vehicle proprietes will be populated when we learn to get user's imput
+            vehicle.setName(getVehicleNameFromUser());
+            vehicle.setMileage(
+                    ThreadLocalRandom.current().nextDouble(5, 15)
+            );
+
+            System.out.println("Vehicle mileage: " + vehicle.getMileage());
             competitors.add(vehicle);
         }
     }
 
-    private void displayCompetitors(){
+    private String getVehicleNameFromUser() {
+        System.out.println("Please enter a vehicle name");
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        System.out.println("Your vehicle name is:" + name);
+        return name;
+
+    }
+
+    private int getCompetitorCountFromUser() throws Exception {
+        System.out.println("Please enter number of players: ");
+        Scanner scanner = new Scanner(System.in);
+        try {
+            int numberOfPlayers = scanner.nextInt();
+            System.out.println("Selected number of players:" + numberOfPlayers);
+            return numberOfPlayers;
+        } catch (InputMismatchException exception) {
+            throw new Exception("Integer required.");
+        }
+
+
+    }
+
+    private void displayCompetitors() {
         System.out.println("Welcome! Today's competitors are:");
-        for (int i = 0 ; i < competitors.size(); i++) {
+        for (int i = 0; i < competitors.size(); i++) {
             System.out.println(competitors.get(i).getName());
         }
     }
