@@ -19,7 +19,52 @@ public class Game {
         addTracks();
         displayAvailableTracks();
 
-        Track track =
+        int numberFromUser = getTrackNumberFromUser();
+        Track track = tracks[numberFromUser - 1];
+        System.out.println("Selected track: " + track.getName());
+
+        boolean noWinnerYet = true;
+        int competitorsWithoutFuel = 0;
+
+
+        while (noWinnerYet && competitorsWithoutFuel < competitors.size()){
+            for (Vehicle vehicle : competitors) {
+                double speed = getAccelerationSpeedFromUser();
+                vehicle.accelerate(speed);
+
+                if (vehicle.getFuelLevel() <= 0) {
+                    competitorsWithoutFuel++;
+                }
+
+                if (vehicle.getTotalTraveledDistance() >= track.getLenght()) ;
+                System.out.println("Congrats! The winner is: " + vehicle.getName());
+                noWinnerYet = false;
+                break;
+            }
+        }
+    }
+
+
+    private int getTrackNumberFromUser() {
+        System.out.println("Please choose a track: ");
+        Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException exception) {
+            System.out.println("Please Re-enter");
+            return getTrackNumberFromUser();
+        }
+    }
+
+    private double getAccelerationSpeedFromUser() {
+        System.out.println("Please enter acceleration speed:");
+        Scanner scanner = new Scanner(System.in);
+        try {
+            return scanner.nextDouble();
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter a valid decimal number.");
+            return getAccelerationSpeedFromUser();
+        }
     }
 
     private void addCompetitors(int competitorCount) {
@@ -52,9 +97,10 @@ public class Game {
             System.out.println("Selected number of players:" + numberOfPlayers);
             return numberOfPlayers;
         } catch (InputMismatchException exception) {
-            throw new Exception("Integer required.");
+//            throw new Exception("Integer required.");
+            System.out.println("Please enter a valid integer.");
+            return getCompetitorCountFromUser();
         }
-
 
     }
 
