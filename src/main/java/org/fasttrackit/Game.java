@@ -1,5 +1,10 @@
 package org.fasttrackit;
 
+import org.fasttrackit.domain.TopWinner;
+import org.fasttrackit.service.TopWinnerService;
+
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -8,9 +13,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
 
-
+//    project update demo
+    private TopWinnerService topWinnerService = new TopWinnerService();
     private Track[] tracks = new Track[10];
     private List<Vehicle> competitors = new ArrayList<>();
+
+    public Game() throws SQLException, IOException, ClassNotFoundException {
+    }
 
 
     public void start() throws Exception {
@@ -38,6 +47,13 @@ public class Game {
 
                 if (vehicle.getTotalTraveledDistance() >= track.getLenght()) ;
                 System.out.println("Congrats! The winner is: " + vehicle.getName());
+
+                TopWinner topWinner = new TopWinner();
+                topWinner.setName(vehicle.getName());
+                topWinner.setWonRaces(1);
+
+                topWinnerService.createTopWinner(topWinner);
+
                 noWinnerYet = false;
                 break;
             }
