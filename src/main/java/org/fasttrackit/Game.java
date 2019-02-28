@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
 
-//    project update demo
+    //    project update demo
     private TopWinnerService topWinnerService = new TopWinnerService();
     private Track[] tracks = new Track[10];
     private List<Vehicle> competitors = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Game {
         int competitorsWithoutFuel = 0;
 
 
-        while (noWinnerYet && competitorsWithoutFuel < competitors.size()){
+        while (noWinnerYet && competitorsWithoutFuel < competitors.size()) {
             for (Vehicle vehicle : competitors) {
                 double speed = getAccelerationSpeedFromUser();
                 vehicle.accelerate(speed);
@@ -87,6 +87,7 @@ public class Game {
         for (int i = 0; i < competitorCount; i++) {
             Vehicle vehicle = new Vehicle();
             vehicle.setName(getVehicleNameFromUser());
+            vehicle.setFuelLevel(100);
             vehicle.setMileage(
                     ThreadLocalRandom.current().nextDouble(5, 15)
             );

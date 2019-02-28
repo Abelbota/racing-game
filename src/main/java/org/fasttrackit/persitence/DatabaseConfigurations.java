@@ -13,22 +13,23 @@ public class DatabaseConfigurations {
 
         Properties properties = new Properties();
 
-        InputStream inputStream = DatabaseConfigurations.class
-                .getClassLoader()
-                .getResourceAsStream("db.properties");
+//        try-with-resources
+        try (InputStream inputStream =
+                     DatabaseConfigurations.class
+                             .getClassLoader()
+                             .getResourceAsStream("db.properties")) {
 
 
-        properties.load(inputStream);
+            properties.load(inputStream);
 
 //        LOAD DRIVER CLASS
 
-        Class.forName(properties.getProperty("DB_DRIVER_CLASS"));
+            Class.forName(properties.getProperty("DB_DRIVER_CLASS"));
 
-        return DriverManager.getConnection(
-                properties.getProperty("DB_URL"),
-                properties.getProperty("DB_USERNAME"),
-                properties.getProperty("DB_PASSWORD"));
-
-
+            return DriverManager.getConnection(
+                    properties.getProperty("DB_URL"),
+                    properties.getProperty("DB_USERNAME"),
+                    properties.getProperty("DB_PASSWORD"));
+        }
     }
 }
