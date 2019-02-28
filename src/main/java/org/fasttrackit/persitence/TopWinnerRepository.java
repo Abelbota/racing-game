@@ -27,16 +27,14 @@ public class TopWinnerRepository {
     }
 
     public List<TopWinner> getTopWinners() throws SQLException, IOException, ClassNotFoundException {
-
-        Connection connection = DatabaseConfigurations.getConnection();
-
-        String query =
-                "SELECT `name` , wonRaces FROM top_winners ORDER BY wonRaces DESC;";
+        try(Connection connection = DatabaseConfigurations.getConnection()) {
+            String query =
+                "SELECT `name` , wonRaces,id  FROM top_winners ORDER BY wonRaces DESC;";
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
 
-        List<TopWinner> reponse = new ArrayList<>();
+        List<TopWinner> response = new ArrayList<>();
 
         while (resultSet.next()) {
             TopWinner topWinner = new TopWinner();
@@ -44,9 +42,10 @@ public class TopWinnerRepository {
             topWinner.setName(resultSet.getString("name"));
             topWinner.setWonRaces(resultSet.getInt("wonRaces"));
 
-            reponse.add(topWinner);
+            response.add(topWinner);
 
         }
-        return reponse;
+        return response;
+        }
     }
 }
